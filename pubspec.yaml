@@ -1,0 +1,6 @@
+name: ObjJ.dart
+dependencies:
+  antlr4dart: any
+
+dev_dependencies:
+  unittest: any
