@@ -87,7 +87,7 @@ category_name:
 protocol_name:
 	IDENTIFIER;
 
-Non-static method HTML_QuickForm_RuleRegistry::singleton() should not be called statically,
+instance_variables
     : '{' instance_variables '}'
     ;
 
@@ -133,10 +133,8 @@ IDENTIFIER;
 
 method_type: '(' type_name ')';
 
-block_type:type_specifier '(''^' type_specifier? ')' block_parameters? ;
-
 type_specifier:
-'void' | 'char' | 'short' | 'int' | 'long' | 'float' | 'double' | 'unsigned'
+'var' | 'void' | 'char' | 'short' | 'int' | 'long' | 'float' | 'double' | 'unsigned'
 	|	('id' ( protocol_reference_list )? )
 	|	(class_name ( protocol_reference_list )?)
 	|	IDENTIFIER ;
@@ -154,8 +152,7 @@ primary_expression:
 	| protocol_expression
         | dictionary_expression
         | array_expression
-        | box_expression
-        | block_expression;
+        | box_expression;
 
 dictionary_pair:
          postfix_expression':'postfix_expression;
@@ -169,9 +166,6 @@ array_expression:
 box_expression:
         '@''('postfix_expression')' |
         '@'constant;
-block_parameters: '(' (type_variable_declarator | 'void')? (',' type_variable_declarator)* ')';
-
-block_expression:'^' type_specifier? block_parameters? compound_statement;
 
 message_expression:
 	'[' receiver message_selector ']'
@@ -237,8 +231,7 @@ specifier_qualifier_list : type_specifier+ ;
 declarator : direct_declarator ;
 
 direct_declarator : identifier declarator_suffix*
-                  | '(' declarator ')' declarator_suffix*
-                  | '(''^' identifier? ')' block_parameters;
+                  | '(' declarator ')' declarator_suffix*;
 
 
 declarator_suffix : '[' constant_expression? ']'
@@ -252,8 +245,7 @@ parameter_declaration
 initializer : assignment_expression
 	    | '{' initializer (',' initializer)* ','? '}' ;
 
-type_name : specifier_qualifier_list
-          | block_type;
+type_name : specifier_qualifier_list;
 
 
 
