@@ -62,22 +62,6 @@ abstract class ObjJListener extends ParseTreeListener {
   /// [context] is the parse tree.
   void exitInit_declarator(Init_declaratorContext context);
 
-  /// Enter a parse tree produced by [ObjJParser.array_expression].
-  /// [context] is the parse tree.
-   void enterArray_expression(Array_expressionContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.array_expression].
-  /// [context] is the parse tree.
-  void exitArray_expression(Array_expressionContext context);
-
-  /// Enter a parse tree produced by [ObjJParser.direct_declarator].
-  /// [context] is the parse tree.
-   void enterDirect_declarator(Direct_declaratorContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.direct_declarator].
-  /// [context] is the parse tree.
-  void exitDirect_declarator(Direct_declaratorContext context);
-
   /// Enter a parse tree produced by [ObjJParser.postfix_expression].
   /// [context] is the parse tree.
    void enterPostfix_expression(Postfix_expressionContext context);
@@ -414,14 +398,6 @@ abstract class ObjJListener extends ParseTreeListener {
   /// [context] is the parse tree.
   void exitProtocol_list(Protocol_listContext context);
 
-  /// Enter a parse tree produced by [ObjJParser.translation_unit].
-  /// [context] is the parse tree.
-   void enterTranslation_unit(Translation_unitContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.translation_unit].
-  /// [context] is the parse tree.
-  void exitTranslation_unit(Translation_unitContext context);
-
   /// Enter a parse tree produced by [ObjJParser.init_declarator_list].
   /// [context] is the parse tree.
    void enterInit_declarator_list(Init_declarator_listContext context);
@@ -470,6 +446,14 @@ abstract class ObjJListener extends ParseTreeListener {
   /// [context] is the parse tree.
   void exitSelection_statement(Selection_statementContext context);
 
+  /// Enter a parse tree produced by [ObjJParser.root].
+  /// [context] is the parse tree.
+   void enterRoot(RootContext context);
+
+  /// Exit a parse tree produced by [ObjJParser.root].
+  /// [context] is the parse tree.
+  void exitRoot(RootContext context);
+
   /// Enter a parse tree produced by [ObjJParser.constant_expression].
   /// [context] is the parse tree.
    void enterConstant_expression(Constant_expressionContext context);
@@ -477,14 +461,6 @@ abstract class ObjJListener extends ParseTreeListener {
   /// Exit a parse tree produced by [ObjJParser.constant_expression].
   /// [context] is the parse tree.
   void exitConstant_expression(Constant_expressionContext context);
-
-  /// Enter a parse tree produced by [ObjJParser.specifier_qualifier_list].
-  /// [context] is the parse tree.
-   void enterSpecifier_qualifier_list(Specifier_qualifier_listContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.specifier_qualifier_list].
-  /// [context] is the parse tree.
-  void exitSpecifier_qualifier_list(Specifier_qualifier_listContext context);
 
   /// Enter a parse tree produced by [ObjJParser.statement].
   /// [context] is the parse tree.
@@ -501,14 +477,6 @@ abstract class ObjJListener extends ParseTreeListener {
   /// Exit a parse tree produced by [ObjJParser.selector].
   /// [context] is the parse tree.
   void exitSelector(SelectorContext context);
-
-  /// Enter a parse tree produced by [ObjJParser.box_expression].
-  /// [context] is the parse tree.
-   void enterBox_expression(Box_expressionContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.box_expression].
-  /// [context] is the parse tree.
-  void exitBox_expression(Box_expressionContext context);
 
   /// Enter a parse tree produced by [ObjJParser.selector_name].
   /// [context] is the parse tree.
@@ -717,14 +685,6 @@ abstract class ObjJListener extends ParseTreeListener {
   /// Exit a parse tree produced by [ObjJParser.logical_and_expression].
   /// [context] is the parse tree.
   void exitLogical_and_expression(Logical_and_expressionContext context);
-
-  /// Enter a parse tree produced by [ObjJParser.throw_statement].
-  /// [context] is the parse tree.
-   void enterThrow_statement(Throw_statementContext context);
-
-  /// Exit a parse tree produced by [ObjJParser.throw_statement].
-  /// [context] is the parse tree.
-  void exitThrow_statement(Throw_statementContext context);
 
   /// Enter a parse tree produced by [ObjJParser.relational_expression].
   /// [context] is the parse tree.

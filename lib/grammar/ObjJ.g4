@@ -8,7 +8,7 @@ options {
     language = Dart;
 }
 
-translation_unit: external_declaration+ EOF;
+root    : external_declaration+ EOF;
 
 external_declaration:
 COMMENT | LINE_COMMENT | preprocessor_declaration
@@ -63,7 +63,6 @@ protocol_reference_list:
 protocol_list:
 	protocol_name (',' protocol_name)*;
 
-
 property_attributes_list
     : property_attribute (',' property_attribute)*
     ;
@@ -88,7 +87,7 @@ protocol_name:
 	IDENTIFIER;
 
 instance_variables
-    : '{' instance_variables '}'
+    : '{' (type_variable_declarator ';'?)* '}'
     ;
 
 class_method_declaration:
@@ -129,7 +128,7 @@ keyword_declarator:
 	selector? ':' method_type* IDENTIFIER;
 
 selector:
-IDENTIFIER;
+    IDENTIFIER;
 
 method_type: '(' type_name ')';
 
@@ -138,7 +137,6 @@ type_specifier:
 	|	('id' ( protocol_reference_list )? )
 	|	(class_name ( protocol_reference_list )?)
 	|	IDENTIFIER ;
-
 
 primary_expression:
 	IDENTIFIER
@@ -150,22 +148,13 @@ primary_expression:
 	| message_expression
 	| selector_expression
 	| protocol_expression
-        | dictionary_expression
-        | array_expression
-        | box_expression;
+        | dictionary_expression;
 
 dictionary_pair:
          postfix_expression':'postfix_expression;
 
 dictionary_expression:
         '@''{' dictionary_pair? (',' dictionary_pair)* ','? '}';
-
-array_expression:
-        '@''[' postfix_expression? (',' postfix_expression)* ','? ']';
-
-box_expression:
-        '@''('postfix_expression')' |
-        '@'constant;
 
 message_expression:
 	'[' receiver message_selector ']'
@@ -197,16 +186,13 @@ type_variable_declarator:
 	declaration_specifiers declarator;
 
 try_statement:
-	'@try' compound_statement;
+	'try' compound_statement;
 
 catch_statement:
-	'@catch' '('type_variable_declarator')' compound_statement;
+	'catch' '('type_variable_declarator')' compound_statement;
 
 finally_statement:
-	'@finally' compound_statement;
-
-throw_statement:
-	'@throw' '('IDENTIFIER')';
+	'finally' compound_statement;
 
 try_block:
         try_statement
@@ -218,20 +204,15 @@ function_definition : declaration_specifiers? declarator compound_statement ;
 
 declaration : declaration_specifiers init_declarator_list? ';';
 
-//FIXME: Duplicated with specifier_qualifier_list
 declaration_specifiers : type_specifier+ ;
 
 init_declarator_list :	init_declarator (',' init_declarator)* ;
 init_declarator : declarator ('=' initializer)? ;
 
 
-specifier_qualifier_list : type_specifier+ ;
-
-//TODO: Remove duplicate
-declarator : direct_declarator ;
-
-direct_declarator : identifier declarator_suffix*
-                  | '(' declarator ')' declarator_suffix*;
+declarator
+    : identifier declarator_suffix*
+    | '(' declarator ')' declarator_suffix*;
 
 
 declarator_suffix : '[' constant_expression? ']'
@@ -245,8 +226,7 @@ parameter_declaration
 initializer : assignment_expression
 	    | '{' initializer (',' initializer)* ','? '}' ;
 
-type_name : specifier_qualifier_list;
-
+type_name : declaration_specifiers;
 
 
 parameter_declaration_list
@@ -349,7 +329,6 @@ postfix_expression : primary_expression
   ('[' expression ']'
   | '(' argument_expression_list? ')'
   | '.' identifier
-  | '->' identifier
   | '++'
   | '--'
   )* ;
@@ -359,23 +338,22 @@ argument_expression_list
 
 identifier : IDENTIFIER;
 
-constant : DECIMAL_LITERAL | HEX_LITERAL | OCTAL_LITERAL | CHARACTER_LITERAL | FLOATING_POINT_LITERAL ;
+constant : DECIMAL_LITERAL | HEX_LITERAL | CHARACTER_LITERAL | FLOATING_POINT_LITERAL ;
 
 // LEXER
 
 // §3.9 Keywords
 
 
-CATCH           : '@catch';
+CATCH           : 'catch';
 CLASS           : '@class';
 END             : '@end';
-FINALLY         : '@finally';
+FINALLY         : 'finally';
 IMPLEMENTATION  : '@implementation';
 PROTOCOL        : '@protocol';
 OPTIONAL        : '@optional';
 SELECTOR        : '@selector';
-THROW           : '@throw';
-TRY             : '@try';
+TRY             : 'try';
 SUPER           : 'super';
 SELF            : 'self';
 
@@ -492,25 +470,15 @@ HEX_LITERAL : '0' ('x'|'X') HexDigit+ ;
 
 DECIMAL_LITERAL : ('0' | '1'..'9' '0'..'9'*) ;
 
-OCTAL_LITERAL : '0' ('0'..'7')+ ;
-
 fragment
 HexDigit : ('0'..'9'|'a'..'f'|'A'..'F') ;
 
 fragment
-FLOATING_POINT_LITERAL : ('0'..'9')+ ('.' ('0'..'9')*)? ;
+FLOATING_POINT_LITERAL : DECIMAL_LITERAL ('.' DECIMAL_LITERAL*)? ;
 
 fragment
 EscapeSequence
     :   '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')
-    |   OctalEscape
-    ;
-
-fragment
-OctalEscape
-    :   '\\' ('0'..'3') ('0'..'7') ('0'..'7')
-    |   '\\' ('0'..'7') ('0'..'7')
-    |   '\\' ('0'..'7')
     ;
 
 fragment

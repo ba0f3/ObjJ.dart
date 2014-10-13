@@ -51,18 +51,6 @@ class ObjJBaseListener implements ObjJListener {
   void exitInit_declarator(Init_declaratorContext context) {}
 
   /// The default implementation does nothing.
-  void enterArray_expression(Array_expressionContext context) {}
-
-  /// The default implementation does nothing.
-  void exitArray_expression(Array_expressionContext context) {}
-
-  /// The default implementation does nothing.
-  void enterDirect_declarator(Direct_declaratorContext context) {}
-
-  /// The default implementation does nothing.
-  void exitDirect_declarator(Direct_declaratorContext context) {}
-
-  /// The default implementation does nothing.
   void enterPostfix_expression(Postfix_expressionContext context) {}
 
   /// The default implementation does nothing.
@@ -315,12 +303,6 @@ class ObjJBaseListener implements ObjJListener {
   void exitProtocol_list(Protocol_listContext context) {}
 
   /// The default implementation does nothing.
-  void enterTranslation_unit(Translation_unitContext context) {}
-
-  /// The default implementation does nothing.
-  void exitTranslation_unit(Translation_unitContext context) {}
-
-  /// The default implementation does nothing.
   void enterInit_declarator_list(Init_declarator_listContext context) {}
 
   /// The default implementation does nothing.
@@ -357,16 +339,16 @@ class ObjJBaseListener implements ObjJListener {
   void exitSelection_statement(Selection_statementContext context) {}
 
   /// The default implementation does nothing.
+  void enterRoot(RootContext context) {}
+
+  /// The default implementation does nothing.
+  void exitRoot(RootContext context) {}
+
+  /// The default implementation does nothing.
   void enterConstant_expression(Constant_expressionContext context) {}
 
   /// The default implementation does nothing.
   void exitConstant_expression(Constant_expressionContext context) {}
-
-  /// The default implementation does nothing.
-  void enterSpecifier_qualifier_list(Specifier_qualifier_listContext context) {}
-
-  /// The default implementation does nothing.
-  void exitSpecifier_qualifier_list(Specifier_qualifier_listContext context) {}
 
   /// The default implementation does nothing.
   void enterStatement(StatementContext context) {}
@@ -379,12 +361,6 @@ class ObjJBaseListener implements ObjJListener {
 
   /// The default implementation does nothing.
   void exitSelector(SelectorContext context) {}
-
-  /// The default implementation does nothing.
-  void enterBox_expression(Box_expressionContext context) {}
-
-  /// The default implementation does nothing.
-  void exitBox_expression(Box_expressionContext context) {}
 
   /// The default implementation does nothing.
   void enterSelector_name(Selector_nameContext context) {}
@@ -541,12 +517,6 @@ class ObjJBaseListener implements ObjJListener {
 
   /// The default implementation does nothing.
   void exitLogical_and_expression(Logical_and_expressionContext context) {}
-
-  /// The default implementation does nothing.
-  void enterThrow_statement(Throw_statementContext context) {}
-
-  /// The default implementation does nothing.
-  void exitThrow_statement(Throw_statementContext context) {}
 
   /// The default implementation does nothing.
   void enterRelational_expression(Relational_expressionContext context) {}
