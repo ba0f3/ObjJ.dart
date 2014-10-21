@@ -8,7 +8,7 @@ options {
     language = Dart;
 }
 
-root    : external_declaration+ EOF;
+root : external_declaration+ EOF;
 
 external_declaration:
 COMMENT | LINE_COMMENT | preprocessor_declaration
@@ -86,9 +86,7 @@ category_name:
 protocol_name:
 	IDENTIFIER;
 
-instance_variables
-    : '{' (type_variable_declarator ';'?)* '}'
-    ;
+instance_variables: '{' (type_variable_declarator ';'?)* '}';
 
 class_method_declaration:
 	('+' method_declaration)
@@ -183,7 +181,7 @@ protocol_expression:
 	'@protocol' '(' protocol_name ')';
 
 type_variable_declarator:
-	declaration_specifiers declarator;
+	type_specifier declarator;
 
 try_statement:
 	'try' compound_statement;
@@ -200,11 +198,9 @@ try_block:
         ( finally_statement )?;
 
 
-function_definition : declaration_specifiers? declarator compound_statement ;
+function_definition : type_specifier? declarator compound_statement ;
 
-declaration : declaration_specifiers init_declarator_list? ';';
-
-declaration_specifiers : type_specifier+ ;
+declaration : type_specifier init_declarator_list? ';';
 
 init_declarator_list :	init_declarator (',' init_declarator)* ;
 init_declarator : declarator ('=' initializer)? ;
@@ -221,12 +217,12 @@ declarator_suffix : '[' constant_expression? ']'
 parameter_list : parameter_declaration_list ( ',' '...' )? ;
 
 parameter_declaration
-  : declaration_specifiers declarator? ;
+  : type_specifier declarator? ;
 
 initializer : assignment_expression
 	    | '{' initializer (',' initializer)* ','? '}' ;
 
-type_name : declaration_specifiers;
+type_name : type_specifier;
 
 
 parameter_declaration_list
@@ -256,7 +252,7 @@ selection_statement
   | 'switch' '(' expression ')' statement ;
 
 for_in_statement : 'for' '(' type_variable_declarator 'in' expression? ')' statement;
-for_statement: 'for' '(' ((declaration_specifiers init_declarator_list) | expression)? ';' expression? ';' expression? ')' statement;
+for_statement: 'for' '(' ((type_specifier init_declarator_list) | expression)? ';' expression? ';' expression? ')' statement;
 while_statement: 'while' '(' expression ')' statement;
 do_statement: 'do' statement 'while' '(' expression ')' ';';
 

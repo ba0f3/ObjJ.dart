@@ -1,3 +1,11 @@
+@class CPObject;
+
+@implementation MyObject
+{
+	var tao;	
+}
+@end
+
 @implementation Person : CPObject
 {
     CPString name;
@@ -13,4 +21,11 @@
     return name;
 }
 
+@end
+
+
+@implementation Kid : Person
+{
+    
+}
 @end
